@@ -1,3 +1,5 @@
+import Carousel from "@/components/Carousel";
+import { IHeroesData } from "@/interfaces/heroes";
 
 interface IPropos {
     params: {
@@ -5,8 +7,23 @@ interface IPropos {
     }
 }
 
-export default function Hero({ params: { id } }: IPropos) {
+async function getHeroesData(): Promise<{ data: IHeroesData[] }> {
+    const res = await fetch(`${process.env.DOMAIN_ORIGIN}/api/heroes`);
+
+    if (!res.ok) {
+        throw new Error("Failed to request heroes list")
+    }
+
+    return res.json();
+}
+
+export default async function Hero({ params: { id } }: IPropos) {
+    const heroes = await getHeroesData();
+
     return (
-        <h1>Hero {id}</h1>
+        <Carousel 
+            heroes={heroes.data} 
+            activeId={id}
+        />
     );
 }

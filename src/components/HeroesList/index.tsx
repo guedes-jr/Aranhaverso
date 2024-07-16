@@ -8,6 +8,7 @@ import styles from "./heroesList.module.scss"
 
 import { spidermanFont } from "@/app/fonts";
 import { IHeroesData } from "@/interfaces/heroes";
+import Link from "next/link";
 
 interface IProps {
     heroes: IHeroesData[];
@@ -38,7 +39,9 @@ export default function HeroesList({ heroes } : IProps) {
                     whileTap={{ scale: 0.8 }}
                     transition={{ duration: 0.8 }}
                 >
-                    <HeroPicture hero={hero} />
+                    <Link href={`/hero/${hero.id}`}>
+                        <HeroPicture hero={hero} />
+                    </Link>
                 </motion.div>
             ))}
             </motion.section>
