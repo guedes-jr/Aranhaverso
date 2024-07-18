@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 
 import HeroeDetails from "../HeroeDetails";
 import HeroPicture from "../HeroePicture";
@@ -9,7 +10,11 @@ import styles from "./carousel.module.scss";
 
 import { IHeroesData } from "@/interfaces/heroes";
 
-
+enum enPosition {
+    FRONT = 0,
+    MIDDLE = 1,
+    BACK = 2,
+}
 
 interface IProps {
     heroes: IHeroesData[];
@@ -30,6 +35,22 @@ export default function Carousel({ heroes, activeId }: IProps) {
         setVisibleItems(visibleItems);
     }, [heroes, activeIndex]);
 
+    useEffect(() => {
+        const htmlEl = document.querySelector("html");
+
+        if (!htmlEl || !visibleItems) {
+            return;
+        }
+
+        const currentHeroId = visibleItems[enPosition.MIDDLE].id;
+        htmlEl.style.backgroundImage = `url("/spiders/${currentHeroId}-background.png")`;
+        htmlEl.classList.add("hero-page");
+
+        return () => {
+            htmlEl.classList.remove("hero-page");
+        }
+    }, [visibleItems])
+
     const hendleChangeActiveIndex = (newDirection: number) => {
         setActiveIndex((prevActiveIndex) => prevActiveIndex + newDirection);
     }
@@ -42,11 +63,20 @@ export default function Carousel({ heroes, activeId }: IProps) {
         <div className={styles.container}>
             <div className={styles.carousel}>
                 <div className={styles.wrapper} onClick={() => hendleChangeActiveIndex(1)}>
-                    {visibleItems.map((item) => (
-                        <div key={item.id} className={styles.hero}>
+                    <AnimatePresence mode="popLayout">
+                    {visibleItems.map((item, position) => (
+                        <motion.div 
+                          key={item.id} 
+                          className={styles.hero}
+                          initial={{ x: -1500, scale: 0.75 }}
+                          animate={{ x:0, ...getItemStyles(position) }}
+                          exit={{ x:0, opacity: 0, scale: 1, left: "-20%" }}
+                          transition={{ duration: 0.8 }}
+                        >
                             <HeroPicture hero={item} />
-                        </div>
+                        </motion.div>
                     ))}
+                    </AnimatePresence>
                 </div>
             </div>
 
@@ -55,4 +85,32 @@ export default function Carousel({ heroes, activeId }: IProps) {
             </div>
         </div>
     );
+}
+
+const getItemStyles = (position: enPosition) => {
+    if (position === enPosition.FRONT) {
+        return { 
+            zIndex: 3,
+            filter: "blur(10px)",
+            scale: 1.2
+        };
+    }
+
+    if (position === enPosition.MIDDLE) {
+        return { 
+            zindex: 2,
+            left: "500px",
+            scale: 0.8,
+            top: "-10%"
+        };
+    }
+
+    return { 
+        zIndex: 1,
+        filter: "blur(10px)",
+        left: 160,
+        top: "-20%",
+        scale: 0.6,
+        opacity: 0.8,
+    };
 }
