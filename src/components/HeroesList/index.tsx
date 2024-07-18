@@ -1,14 +1,14 @@
 "use client"
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 
 import HeroPicture from "../HeroePicture";
 
-import styles from "./heroesList.module.scss"
+import styles from "./heroesList.module.scss";
 
 import { spidermanFont } from "@/app/fonts";
 import { IHeroesData } from "@/interfaces/heroes";
-import Link from "next/link";
 
 interface IProps {
     heroes: IHeroesData[];
