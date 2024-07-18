@@ -1,6 +1,8 @@
 import HeroeDetails from "../HeroeDetails";
 
-import { IHeroesData } from "@/interfaces/heroes"
+import styles from "./carousel.module.scss";
+
+import { IHeroesData } from "@/interfaces/heroes";
 
 
 interface IProps {
@@ -10,9 +12,16 @@ interface IProps {
 
 export default function Carousel({ heroes, activeId }: IProps) {
     return (
-        <>
-            <h1>Componente Carousel: {activeId}</h1>
-            <HeroeDetails data={heroes[0]} />
-        </>
+        <div className={styles.container}>
+            <div className={styles.carousel}>
+                <div className={styles.wrapper}>
+                    Lista com os heróis
+                </div>
+            </div>
+            
+            <div className={styles.details}>
+                <HeroeDetails data={heroes[0]} />
+            </div>
+        </div>
     );
 }
