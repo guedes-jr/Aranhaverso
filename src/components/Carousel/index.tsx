@@ -85,6 +85,22 @@ export default function Carousel({ heroes, activeId }: IProps) {
 
     }, [visibleItems, transitionAudio, voicesAudio])
 
+    const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
+        setStartInteractionPosition(e.clientX);
+    }
+
+    const handleDragEnd = (e: React.DragEvent<HTMLDivElement>) => {
+        if (!startInteractionPosition) {
+            return null;
+        }
+
+        const endInteractionPosition = e.clientX;
+        const diffPosition = endInteractionPosition - startInteractionPosition;
+
+        const newPosition = diffPosition > 0 ? -1 : 1;
+        hendleChangeActiveIndex(newPosition);
+    }
+
     const hendleChangeActiveIndex = (newDirection: number) => {
         setActiveIndex((prevActiveIndex) => prevActiveIndex + newDirection);
     }
@@ -96,7 +112,11 @@ export default function Carousel({ heroes, activeId }: IProps) {
     return (
         <div className={styles.container}>
             <div className={styles.carousel}>
-                <div className={styles.wrapper} onClick={() => hendleChangeActiveIndex(1)}>
+                <div 
+                  className={styles.wrapper}
+                  onDragStart={handleDragStart}
+                  onDragEnd={handleDragEnd}
+                >
                     <AnimatePresence mode="popLayout">
                     {visibleItems.map((item, position) => (
                         <motion.div 
