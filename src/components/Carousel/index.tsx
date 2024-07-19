@@ -24,7 +24,7 @@ interface IProps {
 export default function Carousel({ heroes, activeId }: IProps) {
     const [visibleItems, setVisibleItems] = useState<IHeroesData[] | null>(null);
     const [activeIndex, setActiveIndex] = useState<number>(
-        heroes.findIndex((hero) => hero.id === activeId)
+        heroes.findIndex((hero) => hero.id === activeId) - 1
     );
 
     useEffect(() => {
@@ -80,9 +80,14 @@ export default function Carousel({ heroes, activeId }: IProps) {
                 </div>
             </div>
 
-            <div className={styles.details}>
-                <HeroeDetails data={heroes[0]} />
-            </div>
+            <motion.div 
+              className={styles.details}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1, duration: 2 }}
+            >
+                <HeroeDetails data={visibleItems[enPosition.MIDDLE]} />
+            </motion.div>
         </div>
     );
 }
