@@ -27,6 +27,8 @@ export default function Carousel({ heroes, activeId }: IProps) {
         heroes.findIndex((hero) => hero.id === activeId) - 1
     );
 
+    const [startInteractionPosition, setStartInteractionPosition] = useState<number>(0);
+
     const transitionAudio = useMemo(() => new Audio("/songs/transition.mp3"), []);
 
     const voicesAudio: Record<string, HTMLAudioElement> = useMemo(
