@@ -1,12 +1,12 @@
 
 import Image from "next/image";
-// eslint-disable-next-line import/order
 import { Quicksand } from "next/font/google";
 
-// eslint-disable-next-line import/order
-import styles from "@components/HeroeDetails/heroDetails.module.scss";
 import { spidermanFont } from "@/app/fonts";
+import styles from "@components/HeroeDetails/heroDetails.module.scss";
 import { IHeroesData } from "@/interfaces/heroes";
+
+
 
 const quicksand = Quicksand({
     subsets: ["latin"],
