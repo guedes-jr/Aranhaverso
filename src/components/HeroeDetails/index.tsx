@@ -1,8 +1,10 @@
 
 import Image from "next/image";
-import styles from "@components/HeroeDetails/heroDetails.module.scss";
+// eslint-disable-next-line import/order
 import { Quicksand } from "next/font/google";
 
+// eslint-disable-next-line import/order
+import styles from "@components/HeroeDetails/heroDetails.module.scss";
 import { spidermanFont } from "@/app/fonts";
 import { IHeroesData } from "@/interfaces/heroes";
 

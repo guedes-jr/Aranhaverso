@@ -1,10 +1,12 @@
 "use client"
 
 import Link from "next/link";
+// eslint-disable-next-line import/order
 import { motion } from "framer-motion";
-import HeroPicture from "@components/HeroePicture";
-import styles from "@components/HeroesList/heroesList.module.scss";
 
+import HeroPicture from "@components/HeroePicture";
+// eslint-disable-next-line import/order
+import styles from "@components/HeroesList/heroesList.module.scss";
 import { spidermanFont } from "@/app/fonts";
 import { IHeroesData } from "@/interfaces/heroes";
 
