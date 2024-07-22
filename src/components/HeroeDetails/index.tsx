@@ -1,7 +1,7 @@
-import { Quicksand } from "next/font/google";
-import Image from "next/image";
 
-import styles from "./heroDetails.module.scss";
+import Image from "next/image";
+import styles from "@components/HeroeDetails/heroDetails.module.scss";
+import { Quicksand } from "next/font/google";
 
 import { spidermanFont } from "@/app/fonts";
 import { IHeroesData } from "@/interfaces/heroes";

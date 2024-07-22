@@ -2,11 +2,9 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-
-import HeroeDetails from "../HeroeDetails";
-import HeroPicture from "../HeroePicture";
-
-import styles from "./carousel.module.scss";
+import HeroeDetails from "@components/HeroeDetails";
+import HeroPicture from "@components/HeroePicture";
+import styles from "@components/Carousel/carousel.module.scss";
 
 import { IHeroesData } from "@/interfaces/heroes";
 
@@ -94,15 +92,31 @@ export default function Carousel({ heroes, activeId }: IProps) {
             return null;
         }
 
-        const endInteractionPosition = e.clientX;
-        const diffPosition = endInteractionPosition - startInteractionPosition;
+        hendleChangeDragTouch(e.clientX);
+    }
 
-        const newPosition = diffPosition > 0 ? -1 : 1;
-        hendleChangeActiveIndex(newPosition);
+    const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+        setStartInteractionPosition(e.touches[0].clientX)
+    }
+
+    const handleTouchEnd = (e: React.TouchEvent<HTMLDivElement>) => {
+        if (!startInteractionPosition) {
+            return null;
+        }
+
+        hendleChangeDragTouch(e.changedTouches[0].clientX);
     }
 
     const hendleChangeActiveIndex = (newDirection: number) => {
         setActiveIndex((prevActiveIndex) => prevActiveIndex + newDirection);
+    }
+
+    const hendleChangeDragTouch = (clientX: number) => {
+        const endInteractionPosition = clientX;
+        const diffPosition = endInteractionPosition - startInteractionPosition;
+
+        const newPosition = diffPosition > 0 ? -1 : 1;
+        hendleChangeActiveIndex(newPosition);
     }
 
     if (!visibleItems) {
@@ -116,6 +130,8 @@ export default function Carousel({ heroes, activeId }: IProps) {
                   className={styles.wrapper}
                   onDragStart={handleDragStart}
                   onDragEnd={handleDragEnd}
+                  onTouchStart={handleTouchStart}
+                  onTouchEnd={handleTouchEnd}
                 >
                     <AnimatePresence mode="popLayout">
                     {visibleItems.map((item, position) => (

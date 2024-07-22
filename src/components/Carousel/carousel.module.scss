@@ -38,3 +38,32 @@
         object-position: center right;
     }
 }
+
+@media screen and (max-width: 1440px) {
+    .hero {
+        width: 400px;
+    }
+}
+
+@media screen and (max-width: 1250px) {
+    .hero {
+        width: 300px;
+    }
+}
+
+@media screen and (max-width: 970px) {    
+    .hero {
+        width: 400px;
+        
+        img {
+            top: 0;
+        }
+    }
+    .carousel {
+        flex-direction: column;
+    }
+
+    .details {
+        margin-top: 100dvh;
+    }
+}
