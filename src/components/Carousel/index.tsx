@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useMemo, useState } from "react";
-// eslint-disable-next-line import/order
 import { AnimatePresence, motion } from "framer-motion";
 
 import HeroeDetails from "@components/HeroeDetails";
@@ -9,6 +8,7 @@ import HeroPicture from "@components/HeroePicture";
 import styles from "@components/Carousel/carousel.module.scss";
 
 import { IHeroesData } from "@/interfaces/heroes";
+
 
 enum enPosition {
     FRONT = 0,
