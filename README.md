@@ -8,6 +8,15 @@ O projeto consiste em uma aplicação interativa inspirada no universo do Homem-
   <source src="./public/doc/demo.webm" type="video/mp4">
 </video>
 
+## 📝 Sumário
+
+- [Tecnologias utilizadas no projeto](#-tecnologias-utilizadas-no-projeto)
+- [Materiais](#-materiais)
+- [Protótipo do projeto](#-protótipo-do-projeto)
+- [Estrutura de pastas](#%EF%B8%8F-estrutura-de-pastas)
+- [Instruções de execução](#%EF%B8%8F-instruções-de-execução)
+- [Tutorial do projeto](#-tutorial-do-projeto)
+ 
 ## 💻 Tecnologias utilizadas no projeto
 
 - [React.js](https://reactjs.org) (v18)
